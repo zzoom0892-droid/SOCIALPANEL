@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Fund Your Account</h2>
+    <form id="addFundsForm">
+        <label for="phone">Enter Your Phone Number:</label>
+        <input type="text" id="phone" name="phone" required><br><br>
+        <button type="submit">Get Moniepoint Account</button>
+    </form>
+    <div id="result"></div>
+    <script>
+    // API endpoint for Moniepoint account creation
+    const API_URL = 'http://localhost:5050/api/moniepoint-create-account'; // Use local backend URL
+
+    document.getElementById('addFundsForm').onsubmit = async function(e) {
+        e.preventDefault();
+        const phone = document.getElementById('phone').value;
+        document.getElementById('result').innerText = 'Generating account...';
+        try {
+            const res = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: phone, phone }) // Use phone as name for demo
+            });
+            const data = await res.json();
+            if (data.accountNumber) {
+                // Show account info and payment instructions
+                document.getElementById('result').innerHTML = `
+                  <b>Moniepoint Account Created!</b><br>
+                  <b>Account Number:</b> <span id="copyAcc">${data.accountNumber}</span> <button onclick="copyAccount()">Copy</button><br>
+                  <b>Account Name:</b> ${phone}<br>
+                  <b>Bank Name:</b> Moniepoint<br>
+                  <b>Your Account Number:</b> [YOUR_ACCOUNT_NUMBER]<br>
+                  <br>
+                  <b>Instructions:</b><br>
+                  1. Copy the account number above.<br>
+                  2. Make payment to Moniepoint account.<br>
+                  3. Ensure the account name matches your phone number.<br>
+                  4. Once payment is successful, your dashboard balance will update automatically.<br>
+                `;
+            } else {
+                document.getElementById('result').innerText = data.error || 'Error occurred.';
+            }
+        } catch (err) {
+            document.getElementById('result').innerText = 'Network or server error.';
+        }
+    };
+
+    function copyAccount() {
+        const acc = document.getElementById('copyAcc').innerText;
+        navigator.clipboard.writeText(acc);
+        alert('Account number copied!');
+    }
+    </script>
+</body>
+</html>

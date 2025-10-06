@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API | Social Media Boost Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6fa; margin: 0; }
+        .container { max-width: 600px; margin: 4rem auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 2rem; }
+        h2 { text-align: center; color: #2d3e50; margin-bottom: 2rem; }
+        .api-section { background:#eaf0fb; border-radius:8px; padding:1.5rem; margin-bottom:2rem; }
+        code { background:#f4f6fa; padding:0.2rem 0.5rem; border-radius:4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Public API</h2>
+        <div class="api-section">
+            <strong>Endpoint:</strong> <code>POST /api/order</code><br>
+            <strong>Description:</strong> Place a new order.<br>
+            <strong>Parameters:</strong>
+            <ul>
+                <li><code>category</code> (string)</li>
+                <li><code>service</code> (string)</li>
+                <li><code>link</code> (string)</li>
+                <li><code>price</code> (number)</li>
+            </ul>
+            <strong>Example Request:</strong>
+            <pre>{
+  "category": "Instagram",
+  "service": "Followers",
+  "link": "https://instagram.com/example",
+  "price": 5
+}</pre>
+        </div>
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="dashboard.html" style="color:#2d3e50;text-decoration:underline;">Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

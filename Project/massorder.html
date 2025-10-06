@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Order | Social Media Boost Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6fa; margin: 0; }
+        .container { max-width: 700px; margin: 4rem auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 2rem; }
+        h2 { text-align: center; color: #2d3e50; margin-bottom: 2rem; }
+        .order-list { margin-top: 2rem; }
+        .order-item { background: #eaf0fb; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+        .empty { text-align: center; color: #888; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Mass Orders</h2>
+        <div id="massOrderList" class="order-list"></div>
+        <div id="emptyMassOrders" class="empty" style="display:none;">No mass orders yet.</div>
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="dashboard.html" style="color:#2d3e50;text-decoration:underline;">Back to Dashboard</a>
+        </div>
+    </div>
+    <script>
+        function renderMassOrders() {
+            var massOrders = JSON.parse(localStorage.getItem('massOrders') || '[]');
+            var massOrderList = document.getElementById('massOrderList');
+            var emptyMassOrders = document.getElementById('emptyMassOrders');
+            massOrderList.innerHTML = '';
+            if (massOrders.length === 0) {
+                emptyMassOrders.style.display = 'block';
+                return;
+            }
+            emptyMassOrders.style.display = 'none';
+            massOrders.forEach(function(order, idx) {
+                var div = document.createElement('div');
+                div.className = 'order-item';
+                div.innerHTML = `<strong>Mass Order #${idx+1}</strong><br>Category: ${order.category}<br>Service: ${order.service}<br>Link: ${order.link}<br>Price: ${order.price}`;
+                massOrderList.appendChild(div);
+            });
+        }
+        renderMassOrders();
+    </script>
+</body>
+</html>

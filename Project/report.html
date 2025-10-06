@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Problem | Social Media Boost Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f6fa; margin: 0; }
+        .container { max-width: 500px; margin: 4rem auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 2rem; }
+        h2 { text-align: center; color: #2d3e50; margin-bottom: 2rem; }
+        .form-group { position: relative; margin-bottom: 2rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1.2rem 0.7rem 0.5rem 0.7rem; border-radius: 5px; border: 1px solid #ccc; background: none; font-size: 1rem; outline: none; }
+        .form-group label { position: absolute; top: 1.2rem; left: 0.8rem; color: #888; font-size: 1rem; pointer-events: none; transition: 0.2s ease all; background: #fff; padding: 0 0.2rem; }
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label { top: -0.7rem; left: 0.6rem; font-size: 0.85rem; color: #2d3e50; }
+        .send-btn { background: #2d3e50; color: #fff; border: none; padding: 0.8rem 2rem; border-radius: 5px; cursor: pointer; font-size: 1rem; }
+        .status { text-align: center; color: #2d3e50; margin-top: 1rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Report a Problem</h2>
+        <form id="reportForm">
+            <div class="form-group">
+                <input type="email" id="reportEmail" name="email" placeholder=" " required>
+                <label for="reportEmail">Your Email</label>
+            </div>
+            <div class="form-group">
+                <textarea id="reportMessage" name="message" rows="4" placeholder=" " required></textarea>
+                <label for="reportMessage">Describe the problem</label>
+            </div>
+            <button type="submit" class="send-btn">Send</button>
+        </form>
+        <div id="reportStatus" class="status"></div>
+        <div style="text-align:center;margin-top:2rem;">
+            <a href="dashboard.html" style="color:#2d3e50;text-decoration:underline;">Back to Dashboard</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('reportStatus').textContent = 'Your report has been sent! (Email integration needed)';
+        });
+    </script>
+</body>
+</html>

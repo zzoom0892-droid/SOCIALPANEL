@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f6fa; margin: 0; }
+    .container { max-width: 700px; margin: 3rem auto; background: #fff; border-radius: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 2rem; }
+    h2 { color: #1565c0; text-align: center; margin-bottom: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    th, td { padding: 0.8rem 1rem; border-bottom: 1px solid #e3f2fd; text-align: left; }
+    th { background: #e3f2fd; color: #1565c0; font-weight: bold; }
+    tr:hover { background: #f0f7fa; }
+    .no-records { text-align: center; color: #888; margin-top: 2rem; }
+    @media (max-width: 700px) {
+      .container { padding: 0.5rem; }
+      th, td { padding: 0.5rem; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Transaction History</h2>
+    <table id="historyTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Amount (NGN)</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="historyBody">
+      </tbody>
+    </table>
+    <div id="noRecords" class="no-records" style="display:none;">No transactions found.</div>
+  </div>
+    <script>
+      window.onload = function() {
+        fetch('/api/transactions')
+          .then(res => res.json())
+          .then(data => {
+            const transactions = data.transactions || [];
+            const tbody = document.getElementById('historyBody');
+            tbody.innerHTML = '';
+            transactions.forEach(tx => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `<td>${tx.date}</td><td>${tx.type}</td><td>${tx.amount}</td><td>${tx.description || ''}</td>`;
+              tbody.appendChild(tr);
+            });
+          });
+      };
+    </script>
+</body>
+</html>
